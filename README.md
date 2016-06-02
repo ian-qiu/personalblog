@@ -1,2 +1,2 @@
-# personalblog
+# Personal Blog
 personal blog
