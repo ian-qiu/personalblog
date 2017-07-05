@@ -14,3 +14,17 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//user
+Route::get('/user/get_user_info', 'UserController@get_user_info');
+Route::any('/user/login', 'UserController@login');
+Route::post('/user/registe', 'UserController@registe');
+Route::post('/user/check_username', 'UserController@check_username');
+
+//article
+Route::get('/article/get_article_list', 'ArticleController@get_article_list');
+Route::post('article/add_article', 'ArticleController@add_article');
+Route::match(['get', 'post'], 'article/get_article_by_id', 'ArticleController@get_article_by_id');
+
+//tag
+Route::post('article/new_tag', 'ArticleController@new_tag');
