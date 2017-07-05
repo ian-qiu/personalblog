@@ -5,4 +5,6 @@ Homestead.yaml
 Homestead.json
 .env
 ui/node_modules
+ui/npm-debug.log
 .DS_Store
+.idea
