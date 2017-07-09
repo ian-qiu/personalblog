@@ -1,3 +1,2 @@
 # Personal Blog
-
-react + laravel
+personal blog
