@@ -1,3 +1,0 @@
-# Personal Blog
-
-react + laravel
