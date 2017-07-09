@@ -13,17 +13,15 @@ class AddArticle extends React.Component {
             content: '',
             tags:[],
             inputTag:'',
-            tag_ids:[]
         }
     }
     handleSubmit(e) {
         e.preventDefault();
         const self = this
         let input = this.props.form.getFieldsValue();
-        let tag_ids = this.state.tag_ids
         let data = {
             ...input, 
-            'tag_ids': tag_ids
+            tags: this.state.tags
         }
 
         this.props.form.validateFields(
@@ -81,7 +79,7 @@ class AddArticle extends React.Component {
         const state = this.state
         const inputTag = state.inputTag
         let tags = state.tags
-        let tag_ids = state.tag_ids
+
         if (inputTag.trim().length !== 0 &&tags.indexOf(inputTag) === -1) {
             //new_tag
             request({
@@ -97,25 +95,25 @@ class AddArticle extends React.Component {
                     if (res.body.status === 0) {
                         let tag_id = res.body.data
                         if (tag_id > 0) {
-                            tag_ids = [...tag_ids, tag_id]
+                            tags = [...tags, {
+                                id:tag_id,
+                                name:inputTag,
+                            }]
                             self.setState({
-                                tag_ids
+                                tags
                             })
                         }
                     }
                 }
             })
-
-            tags = [...tags, inputTag]
             this.setState({
-                tags,
                 inputTag:''
             })
         }
     }
 
     handleTagClose = (tagRemove) => {
-        const tags = this.state.tags.filter(tag => tag !== tagRemove);
+        const tags = this.state.tags.filter(tag => tag.name !== tagRemove.name);
         this.setState({tags})
     }
 
@@ -135,7 +133,7 @@ class AddArticle extends React.Component {
         }
 
         return (
-              <div style={{ background: '#fff', padding: 24, minHeight: 100, marginTop:20 }}>
+            <div style={{ background: '#fff', padding: 24, minHeight: 100, marginTop:20 }}>
              
             <Form >
             <FormItem {...formItemLayout}
@@ -161,13 +159,13 @@ class AddArticle extends React.Component {
                 <div>
 
                 {tags.map((tag,index) => {
-                    const isLongTag = tag.length > 10
+                    const isLongTag = tag.name.length > 10
                     const tagElem = (
-                        <Tag key={tag} closable={true} afterClose={() => this.handleTagClose(tag)}>
-                        {isLongTag ? `${tag.slice(1,5)}...` : tag}
+                        <Tag key={tag.id} closable={true} afterClose={() => this.handleTagClose(tag)}>
+                        {isLongTag ? `${tag.name.slice(0,5)}...` : tag.name}
                         </Tag>
                     )
-                    return isLongTag ? <Tooltip title={tag}>{tagElem}</Tooltip> : tagElem;
+                    return isLongTag ? <Tooltip title={tag.name}>{tagElem}</Tooltip> : tagElem;
                 })}
 
                 <Input ref={this.saveTagRef}  type='text' size='small' style={{width:78}} value={inputTag}

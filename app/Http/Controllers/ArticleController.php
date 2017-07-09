@@ -31,8 +31,8 @@ class ArticleController extends Controller
             'title', 'content',
             ),$input
         );
-//        $user_info = UtilHelperFacade::get_login_info();
-        $tags = isset($input['tag_ids']) ? array_filter($input['tag_ids']) : [];
+
+        $tags = isset($input['tags']) ? array_filter($input['tags']) : [];
 
         $new_article = [
             'title' => $input['title'],
@@ -45,7 +45,7 @@ class ArticleController extends Controller
                 $article_id = DB::table('t_article_0')->insertGetId($new_article);
                  array_map(function($x) use ($article_id) {
                      $input = [
-                        'tag_id' => $x,
+                        'tag_id' => $x['id'],
                         'article_id' => $article_id
                      ];
                      $res = Tag_mapping::replace($input);
@@ -103,7 +103,11 @@ class ArticleController extends Controller
         ),$input);
 
         $article = Article::get_article_by_id($input['article_id']);
-        dd($article);
+
+        //tags
+        $tags = Tag::get_tags_by_article_id($input['article_id']);
+
+        $article['tags'] = $tags;
 
         UtilHelperFacade::build_return($article);
     }

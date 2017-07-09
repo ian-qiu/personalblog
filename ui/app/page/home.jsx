@@ -18,38 +18,30 @@ class Home extends React.Component {
     render(){
         return (
             <div>
-            <Layout>
-            <Header>
-                  <Menu
-            theme="dark"
-        mode="horizontal"
-        defaultSelectedKeys={['2']}
-        style={{ lineHeight: '64px' }}
-      >
-        <Menu.Item key="1"><Link to='/'>home</Link></Menu.Item>
-        <Menu.Item key="2">article</Menu.Item>
-        <Menu.Item key="3">about</Menu.Item>
-        <Menu.Item key="4"><Link to='/article/add'>add</Link></Menu.Item>
-      </Menu>
-            </Header>
-            <Content style={{padding:'0 50px'}}>
-    <Breadcrumb style={{ margin: '12px 0' }}>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>List</Breadcrumb.Item>
-        <Breadcrumb.Item>App</Breadcrumb.Item>
-        <Breadcrumb.Item>login</Breadcrumb.Item>
-        <Breadcrumb.Item>register</Breadcrumb.Item>
-      </Breadcrumb>
+                <Layout>
 
-       <div>
-        {this.props.children}
-       </div>
+                    <Header>
+                    <Menu id="home-nav"
+                        theme="dark"
+                        mode="horizontal"
+                        style={{ lineHeight: '64px'}}>
+                        <Menu.Item key="1"><Link to='/'>home</Link></Menu.Item>
+                        <Menu.Item key="2">article</Menu.Item>
+                        <Menu.Item key="3">about</Menu.Item>
+                        <Menu.Item key="4"><Link to='/article/add'>add</Link></Menu.Item>
+                    </Menu>
+                    </Header>
 
-            </Content>
-            <Footer>Footer</Footer>
-            </Layout>
+                    <Content style={{padding:'0 50px'}}>
+                        <div>
+                            {this.props.children}
+                        </div>
+                    </Content>
+
+                    <Footer>Footer</Footer>
+                    
+                </Layout>
             </div>
-
         )
     }
 }

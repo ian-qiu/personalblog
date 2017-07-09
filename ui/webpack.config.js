@@ -10,9 +10,12 @@ var config = {
     output: {
     path: path.resolve(__dirname, 'build/depend'),
     filename: '[name].js',
-    publicPath: 'http://localhost:9000/',
-    chunkFilename: '[name].bundle.js'
+    chunkFilename: '[name].bundle.js',
+    publicPath: 'http://localhost:9090/'
 },
+devServer: {
+    headers: { "Access-Control-Allow-Origin": "*" }
+  },
 module: {
     loaders: [
         {   test: /\.jsx?$/,

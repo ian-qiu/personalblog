@@ -2,7 +2,7 @@ import './style/index.scss';
 
 window.store={}
 
-var dev='http://localhost:9000/';
+var dev='http://localhost:9090/';
 var url,
     random=Math.random()*1000000000;
 

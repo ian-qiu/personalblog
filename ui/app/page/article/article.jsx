@@ -42,10 +42,11 @@ class Article extends React.Component {
     render () {
         return (
             <div style={{ background: '#fff', padding: 24, minHeight: 100, marginTop:20 }}>
-                {this.state.data.title}
-                {this.state.data.ctime}
-                {this.state.data.mtime}
-                {this.state.data.content}
+                <p>{this.state.data.title}</p>
+                <p>{this.state.data.ctime}</p>
+                <p>{this.state.data.mtime}</p>
+                <p>{this.state.data.content}</p>
+                <p>标签: {this.state.data.tags}</p>
             </div>
         )
     }
