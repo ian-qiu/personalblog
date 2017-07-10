@@ -15,11 +15,21 @@ class ArticleController extends Controller
     /*
      * 列表
      */
-    public function get_article_list()
+    public function get_article_list(Request $request)
     {
-        $article_list = Article::get();
+        $index = UtilHelperFacade::get_param_from_array($request->input(), 'index', null, 1);
+        $size = UtilHelperFacade::get_param_from_array($request->input(), 'size', null, 5);
+
+        $offset = ($index - 1) * $size;
+
+        $article_list = Article::take($size)->offset($offset)->get();
         $article_list = empty($article_list) ? [] : $article_list->toArray();
-        UtilHelperFacade::build_return($article_list);
+
+        $article_num = Article::count();
+
+        $data['list'] = $article_list;
+        $data['num'] = isset($article_num) ? $article_num : 0;
+        UtilHelperFacade::build_return($data);
     }
     /*
      * 新增

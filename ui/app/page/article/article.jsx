@@ -1,6 +1,6 @@
 import React from 'react'
 import request from '../../common/request.jsx';
-import {message} from 'antd'
+import {message, Tag} from 'antd'
 
 class Article extends React.Component {
     constructor (props) {
@@ -8,7 +8,9 @@ class Article extends React.Component {
         let article_id = this.props.params.article_id
         this.state = {
             article_id:  article_id,
-            data: {}
+            data: {
+                tags:[]
+            }
         }
     }
 
@@ -40,13 +42,20 @@ class Article extends React.Component {
         })
     }
     render () {
+        const tags = this.state.data.tags
+
         return (
             <div style={{ background: '#fff', padding: 24, minHeight: 100, marginTop:20 }}>
                 <p>{this.state.data.title}</p>
                 <p>{this.state.data.ctime}</p>
                 <p>{this.state.data.mtime}</p>
+                标签: 
+                {tags.map((tag,index) => {
+                    const TagElem = <Tag key={tag.id}>{tag.tag_name}</Tag>
+                    return TagElem
+                })}
+                
                 <p>{this.state.data.content}</p>
-                <p>标签: {this.state.data.tags}</p>
             </div>
         )
     }

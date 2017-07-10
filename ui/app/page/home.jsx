@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout, Menu, Breadcrumb, Button } from 'antd';
+import { Layout, Menu, Breadcrumb, Button} from 'antd';
 import request from '../common/request.jsx';
 import {Link} from 'react-router'
 import ArticleList from './article/articleList.jsx'

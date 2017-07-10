@@ -74,4 +74,17 @@ class UtilHelper
         return $login_info;
     }
 
+    function get_param_from_array($array, $key, $param = '', $default = '')
+    {
+        if (isset($array[$key])) {
+            if ($param) {
+                return $array[$key][$param];
+            } else {
+                return $array[$key];
+            }
+        } else {
+            return $default;
+        }
+    }
+
 }
